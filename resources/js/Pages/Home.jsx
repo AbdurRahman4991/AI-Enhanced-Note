@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { Table, Space, Button, Modal, Input, Form } from 'antd';
-
+import { route } from 'ziggy-js';
 const Home = ({ notes }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
@@ -12,22 +12,23 @@ const Home = ({ notes }) => {
   });
 
   const handleSubmit = () => {
-    if (editingNote) {
-      put(route('notes.update', editingNote.id), {
-        onSuccess: () => {
-          setIsModalOpen(false);
-          reset();
-        },
-      });
-    } else {
-      post(route('notes.store'), {
-        onSuccess: () => {
-          setIsModalOpen(false);
-          reset();
-        },
-      });
-    }
-  };
+  if (editingNote) {
+    put(route('notes.update', editingNote.id), {
+      onSuccess: () => {
+        setIsModalOpen(false);
+        reset();
+      },
+    });
+  } else {
+    post(route('notes.store'), {
+      onSuccess: () => {
+        setIsModalOpen(false);
+        reset();
+      },
+    });
+  }
+};
+
 
   const handleEdit = (note) => {
     setEditingNote(note);

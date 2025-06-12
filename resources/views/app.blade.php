@@ -6,12 +6,13 @@
     @vite('resources/css/app.css')
     {{-- ⚠️ এটি অবশ্যই head-এ থাকতে হবে --}}
     @viteReactRefresh
-    
+        @routes
     {{-- ✅ app.jsx ফাইল একবারই লোড করো --}}
     @vite(['resources/js/app.jsx'])
 
     {{-- ✅ Inertia page title/head সাপোর্ট --}}
     @inertiaHead
+
 </head>
 <body class="antialiased">
     {{-- ✅ React SPA Root --}}
