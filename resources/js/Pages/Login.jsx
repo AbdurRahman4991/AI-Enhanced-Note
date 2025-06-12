@@ -1,9 +1,12 @@
 import React from 'react';
 
+import { router } from '@inertiajs/react';
+
+
 export default function Login() {
   const handleGoogleLogin = () => {
-    alert('Google Login button clicked!');
-    // এখানে তোমার Google OAuth লজিক হবে
+  window.location.href = '/auth/redirect';
+   
   };
 
   return (
