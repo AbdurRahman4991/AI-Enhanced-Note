@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 class NoteController extends Controller
 {
     /**
@@ -12,9 +13,8 @@ class NoteController extends Controller
      */
       public function index()
     {
-        
-      //  $notes = auth()->user()->notes;
-        return Inertia::render('Home');
+        $notes = auth()->user()->notes;
+        return Inertia::render('Home', compact('notes'));
     }
 
     /**
