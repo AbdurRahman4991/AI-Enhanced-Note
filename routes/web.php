@@ -17,8 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [NoteController::class, 'index'])->name('dashboard');
 
     Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
-    Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
-    Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
+    Route::post('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
+    Route::get('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
     Route::post('/ai/summarize', [AIEnhancementController::class, 'summarize'])->middleware('throttle:60,1')->name('ai.summarize');
 });

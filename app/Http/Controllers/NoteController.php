@@ -35,17 +35,30 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, Note $note)
+   public function update(Request $request, Note $note)
     {
-        $this->authorize('update', $note);
+        if (auth()->id() !== $note->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
         $note->update($request->only('title', 'content'));
-        return response()->json(['message' => 'Updated']);
+
+        return redirect()->back()->with('success', 'Note updated successfully.');
     }
 
     public function destroy(Note $note)
     {
-        $this->authorize('delete', $note);
+        if (auth()->id() !== $note->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $note->delete();
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Note deleted successfully.');
     }
 }
